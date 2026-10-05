@@ -1,0 +1,11 @@
+{
+  "gtins": ["0885909950805", "3017620422003", "0000000000000"],
+  "provider": "auto",
+  "apiKey": "TEST_KEY",
+  "fallbackOpenFoodFacts": true,
+  "includeRagChunks": true,
+  "maxConcurrency": 2,
+  "maxRetries": 2,
+  "requestTimeoutSecs": 10,
+  "stopOnAuthError": true
+}

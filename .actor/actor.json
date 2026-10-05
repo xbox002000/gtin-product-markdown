@@ -1,0 +1,28 @@
+{
+  "actorSpecification": 1,
+  "name": "gtin-product-markdown",
+  "title": "GTIN / UPC / EAN → Product Markdown Card",
+  "description": "Look up GTIN/UPC/EAN barcodes via UPCitemdb or Barcode Lookup (bring your own key) with Open Food Facts as a keyless food/FMCG fallback. One Markdown product card (+ optional RAG chunks) per barcode. 256 MB. Not-found & failed rows free. No Idealo/Amazon scraping.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "minMemoryMbytes": 128,
+  "maxMemoryMbytes": 512,
+  "defaultRunOptions": {
+    "build": "latest",
+    "memoryMbytes": 256,
+    "timeoutSecs": 3600
+  },
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  },
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "changelog": "../CHANGELOG.md",
+  "categories": [
+    "ECOMMERCE",
+    "DEVELOPER_TOOLS",
+    "AUTOMATION"
+  ]
+}

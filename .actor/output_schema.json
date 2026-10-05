@@ -1,0 +1,37 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "GTIN product Markdown output",
+  "description": "One dataset row per GTIN, plus REPORT.md, PRODUCTS.md, CHUNKS.jsonl (optional), SUMMARY and OUTPUT in the default key-value store.",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Product results",
+      "description": "Dataset rows: gtin, source, title, brand, size, category, images, description, ingredients, nutrition, asin, url, errorClass, hint.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+    },
+    "reportMarkdown": {
+      "type": "string",
+      "title": "Markdown report (REPORT.md)",
+      "description": "Summary counts + one product card per successful GTIN.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/REPORT.md"
+    },
+    "productsMarkdown": {
+      "type": "string",
+      "title": "Products Markdown (PRODUCTS.md)",
+      "description": "Concatenated product cards only (no summary table).",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/PRODUCTS.md"
+    },
+    "chunks": {
+      "type": "string",
+      "title": "RAG chunks (CHUNKS.jsonl)",
+      "description": "Newline-delimited JSON chunks (~500–800 chars) when includeRagChunks is true.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/CHUNKS.jsonl"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary (SUMMARY)",
+      "description": "ok, failed, bySource, byClass, charged, durationSecs, peakMemoryMb.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

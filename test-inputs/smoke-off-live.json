@@ -1,0 +1,9 @@
+{
+  "gtins": ["3017620422003"],
+  "provider": "auto",
+  "fallbackOpenFoodFacts": true,
+  "includeRagChunks": true,
+  "maxConcurrency": 1,
+  "maxRetries": 2,
+  "requestTimeoutSecs": 30
+}

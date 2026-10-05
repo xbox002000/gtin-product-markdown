@@ -1,0 +1,146 @@
+{
+  "title": "GTIN product Markdown input",
+  "description": "Look up GTIN / UPC / EAN barcodes through UPCitemdb or Barcode Lookup (bring your own API key) with Open Food Facts as a keyless food/FMCG fallback. Every successful product card is charged; not-found and failed rows are free.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "gtins": {
+      "title": "GTINs / UPCs / EANs",
+      "type": "array",
+      "description": "One barcode per line (8–14 digits). Spaces and dashes are stripped; non-digit characters are removed. Duplicates are dropped.",
+      "editor": "stringList",
+      "prefill": [
+        "3017620422003",
+        "0885909950805"
+      ],
+      "sectionCaption": "Inputs"
+    },
+    "barcodes": {
+      "title": "Barcodes (alias of gtins)",
+      "type": "array",
+      "description": "Optional alias of `gtins`. Same normalization rules.",
+      "editor": "stringList",
+      "sectionCaption": "Inputs"
+    },
+    "datasetId": {
+      "title": "Dataset ID (barcode list)",
+      "type": "string",
+      "description": "Optional. Read barcodes from another Actor's dataset. Uses the field set in 'Barcode field', else gtin / upc / ean / barcode / code.",
+      "editor": "textfield",
+      "sectionCaption": "Inputs"
+    },
+    "keyValueStoreId": {
+      "title": "Key-value store ID (barcode list)",
+      "type": "string",
+      "description": "Optional. Read barcodes from a key-value record: JSON array, {\"gtins\": [...]} / {\"barcodes\": [...]}, or plain text with one barcode per line.",
+      "editor": "textfield",
+      "sectionCaption": "Inputs"
+    },
+    "keyValueRecordKey": {
+      "title": "Key-value record key",
+      "type": "string",
+      "description": "Record key inside the key-value store (default INPUT_GTINS).",
+      "editor": "textfield",
+      "default": "INPUT_GTINS",
+      "sectionCaption": "Inputs"
+    },
+    "barcodeField": {
+      "title": "Barcode field (dataset / JSON objects)",
+      "type": "string",
+      "description": "Optional. Name of the field holding the barcode in dataset items or JSON objects.",
+      "editor": "textfield",
+      "sectionCaption": "Inputs"
+    },
+    "provider": {
+      "title": "Provider",
+      "type": "string",
+      "description": "Which barcode API to call. `auto` uses your key with UPCitemdb first (then Barcode Lookup on auth failure), then Open Food Facts on miss when fallback is on. Without a key, `auto` goes straight to Open Food Facts.",
+      "editor": "select",
+      "enum": [
+        "auto",
+        "upcitemdb",
+        "barcodelookup"
+      ],
+      "enumTitles": [
+        "Auto (key provider → Open Food Facts)",
+        "UPCitemdb only (+ optional OFF fallback)",
+        "Barcode Lookup only (+ optional OFF fallback)"
+      ],
+      "default": "auto",
+      "sectionCaption": "Provider & key"
+    },
+    "apiKey": {
+      "title": "Provider API key",
+      "type": "string",
+      "description": "UPCitemdb paid `user_key` or Barcode Lookup `key`. Stored encrypted and never logged. Without a key, paid providers are skipped; Open Food Facts still works when fallback is enabled. Placeholders like YOUR_KEY are ignored.",
+      "editor": "textfield",
+      "isSecret": true,
+      "sectionCaption": "Provider & key"
+    },
+    "upcitemdbUserId": {
+      "title": "UPCitemdb user_key override (optional)",
+      "type": "string",
+      "description": "Rarely needed. UPCitemdb paid plans authenticate with the `user_key` header (same value as apiKey) plus fixed `key_type: 3scale`. Use this only if you want a separate user_key distinct from apiKey.",
+      "editor": "textfield",
+      "isSecret": true,
+      "sectionCaption": "Provider & key"
+    },
+    "fallbackOpenFoodFacts": {
+      "title": "Fallback to Open Food Facts",
+      "type": "boolean",
+      "description": "When the paid provider misses (or no key is provided under auto), look up the GTIN on Open Food Facts (keyless, food/FMCG coverage). Always labels `source=openfoodfacts` on success.",
+      "default": true,
+      "sectionCaption": "Provider & key"
+    },
+    "includeRagChunks": {
+      "title": "Include RAG chunks",
+      "type": "boolean",
+      "description": "Split each product Markdown card into ~500–800 character chunks with headings. Written to key-value record CHUNKS.jsonl.",
+      "default": true,
+      "sectionCaption": "Output"
+    },
+    "maxItems": {
+      "title": "Max items",
+      "type": "integer",
+      "description": "Stop after this many barcodes. 0 = no limit (still subject to platform limits).",
+      "default": 100,
+      "minimum": 0,
+      "maximum": 100000,
+      "sectionCaption": "Limits"
+    },
+    "maxConcurrency": {
+      "title": "Max concurrency",
+      "type": "integer",
+      "description": "Parallel provider requests. Keep low to respect provider rate limits.",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 5,
+      "sectionCaption": "Limits"
+    },
+    "maxRetries": {
+      "title": "Max retries",
+      "type": "integer",
+      "description": "Retries for 429, 5xx and timeouts with exponential backoff (honours Retry-After). 401/403/not-found are not retried.",
+      "default": 3,
+      "minimum": 0,
+      "maximum": 6,
+      "sectionCaption": "Limits"
+    },
+    "requestTimeoutSecs": {
+      "title": "Request timeout (seconds)",
+      "type": "integer",
+      "default": 30,
+      "description": "Timeout per provider request.",
+      "minimum": 5,
+      "maximum": 120,
+      "sectionCaption": "Limits"
+    },
+    "stopOnAuthError": {
+      "title": "Stop on rejected key",
+      "type": "boolean",
+      "description": "After a paid provider rejects the key (401/403), mark remaining paid lookups as skipped (still try Open Food Facts when fallback is on). All free.",
+      "default": true,
+      "sectionCaption": "Limits"
+    }
+  }
+}

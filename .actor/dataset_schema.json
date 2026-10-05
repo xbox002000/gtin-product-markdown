@@ -1,0 +1,62 @@
+{
+  "actorSpecification": 1,
+  "fields": {},
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "gtin",
+          "source",
+          "status",
+          "title",
+          "brand",
+          "size",
+          "category",
+          "asin",
+          "errorClass"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "gtin": { "label": "GTIN", "format": "text" },
+          "source": { "label": "Source", "format": "text" },
+          "status": { "label": "Result", "format": "text" },
+          "title": { "label": "Title", "format": "text" },
+          "brand": { "label": "Brand", "format": "text" },
+          "size": { "label": "Size", "format": "text" },
+          "category": { "label": "Category", "format": "text" },
+          "asin": { "label": "ASIN", "format": "text" },
+          "errorClass": { "label": "Error", "format": "text" }
+        }
+      }
+    },
+    "failed": {
+      "title": "Failed (not charged)",
+      "transformation": {
+        "fields": [
+          "gtin",
+          "source",
+          "errorClass",
+          "httpStatus",
+          "attempts",
+          "errorMessage",
+          "hint"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "gtin": { "label": "GTIN", "format": "text" },
+          "source": { "label": "Source tried", "format": "text" },
+          "errorClass": { "label": "Error", "format": "text" },
+          "httpStatus": { "label": "HTTP", "format": "number" },
+          "attempts": { "label": "Attempts", "format": "number" },
+          "errorMessage": { "label": "Message", "format": "text" },
+          "hint": { "label": "Hint", "format": "text" }
+        }
+      }
+    }
+  }
+}

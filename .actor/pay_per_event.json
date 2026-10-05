@@ -1,0 +1,13 @@
+{
+    "apify-actor-start": {
+        "eventTitle": "Actor start",
+        "eventDescription": "Charged once per run (Apify synthetic start event; priced per GB of run memory, 1 GB minimum). About $0.001 for a default 256 MB run.",
+        "eventPriceUsd": 0.001
+    },
+    "product-card": {
+        "eventTitle": "Product card",
+        "eventDescription": "Charged once per SUCCESSFUL product card returned from any source (upcitemdb, barcodelookup, or openfoodfacts) and saved to the dataset. Not charged: not found, missing key when OFF also misses / OFF disabled, 4xx after retries, unauthorized, rate limited, invalid input, timeouts.",
+        "eventPriceUsd": 0.004,
+        "isPrimaryEvent": true
+    }
+}

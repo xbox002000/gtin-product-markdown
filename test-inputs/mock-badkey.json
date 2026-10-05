@@ -1,0 +1,8 @@
+{
+  "gtins": ["0885909950805", "3017620422003"],
+  "provider": "upcitemdb",
+  "apiKey": "WRONG_KEY",
+  "fallbackOpenFoodFacts": true,
+  "stopOnAuthError": true,
+  "includeRagChunks": false
+}
